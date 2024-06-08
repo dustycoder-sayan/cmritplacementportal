@@ -1,0 +1,111 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<main class="profile-page layout layout--2">
+    <div class="container">
+      <!-- Room Start -->
+      <div class="roomList">
+        <div></div>
+        <div class="roomList__header">
+            <div>
+                <h2>SPAD Details</h2>
+            </div>
+            <!-- <p>
+            <a class="btn btn--main" href="{% url 'spad_details' batch %}?op=extract">
+              Extract to Excel
+            </a>
+            <a class="btn btn--main" href="{% url 'spad_details' batch %}?op=send_email">
+                Send Email
+            </a>
+            </p> -->
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>USN</th>
+                <th>Student</th>
+                <th>Batch</th>
+                <th>Branch</th>
+                <th>Mobile Number (Calling)</th>
+                <th>Communication Address</th>
+                <th>Resume</th>
+                <th>Aadhar Card</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.usn }}</td>
+                <td>{{ student.student.name }}</td>
+                <td>{{ student.batch }}</td>
+                <td>{{ student.branch }}</td>
+                <td>
+                    {% for spf in student.spf_set.all %}
+                        {{ spf.mobileNumberForCalling }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for spf in student.spf_set.all %}
+                        {{ spf.communicationAddress }}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for kyc in student.kyc_set.all %}
+                        {% if kyc.resume %}
+                        <a href="{{ kyc.resume.url }}" target="_blank">{{ student.student.name }}'s Resume</a>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for kyc in student.kyc_set.all %}
+                        {% if kyc.aadharCard %}
+                        <a href="{{ kyc.aadharCard.url }}" target="_blank">{{ student.student.name }}'s Aadhar Card</a>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>    
+        </table>
+      </div>
+      <!-- Room End -->
+
+      <!--   Start -->
+      <div class="topics">
+        <div class="topics__header">
+          <h2>Filter SPAD</h2>
+        </div>
+        <form class="form" action="" method="GET" style="display: inline-block">
+            <p>
+            <div class="form__group">
+                <label for="usn_contains" style="text-transform: uppercase;">USN</label>
+                {{ SPADFilter.form.usn }}
+            </div>
+            <div class="form__group">
+                <label for="usn_contains" style="text-transform: uppercase;">Student Name</label>
+                {{ SPADFilter.form.student_name }}
+            </div>
+            <div class="form__group">
+                <label for="usn_contains" style="text-transform: uppercase;">Branch</label>
+                {{ SPADFilter.form.branch }}
+            </div>
+            <div class="form__group">
+                <label for="usn_contains" style="text-transform: uppercase;">Current Backlogs</label>
+                {{ SPADFilter.form.currentBacklogs }}
+            </div>
+            <div class="form__group">
+                <label for="usn_contains" style="text-transform: uppercase;">Degree CGPA</label>
+                {{ SPADFilter.form.degreeCgpa }}
+            </div>
+            </p>
+            <div class="form__action">
+                <button class="btn btn--main" type="submit">Search</button>
+            </div>
+        </form>
+      </div>
+      <!--  End -->
+    </div>
+  </main>
+
+{% endblock %}

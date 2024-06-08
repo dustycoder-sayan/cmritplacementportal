@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="layout layout--3">
+  <div class="container">
+    <!-- Topics Start -->
+    {% include 'base/home_left.html' %}
+    <!-- Topics End -->
+
+    <!-- Room List Start -->
+    {% include 'base/home_center.html' %}
+    <!-- Room List End -->
+
+    <!-- Activities Start -->
+    {% include 'base/home_right.html' %}
+    <!-- Activities End -->
+  </div>
+</main>
+{% endblock content %}

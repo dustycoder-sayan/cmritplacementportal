@@ -1,0 +1,384 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% if page == 'spf' %}
+<main class="create-room layout">
+    <div class="container">
+      <div class="layout__box">
+        <div class="layout__boxHeader">
+          <div class="layout__boxTitle">
+            <a href="{{ request.META.HTTP_REFERER }}">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> 
+                <title>arrow-left</title>
+                <path
+                  d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                </path>
+              </svg>
+            </a>
+            <h3>Student Placement Form (SPF) : </h3>
+            <p>{{ student.student.name }} ({{ student.usn }})</p>
+          </div>
+        </div>
+        <div class="layout__body">
+          <div class="accordion">
+            <div class="accordion__section">
+              <div class="accordion__header">General Information</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="room_name">Email ID</label>
+                  <h2 style="color: white;">{{ student.student.email }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="room_name">Full Name</label>
+                  <h2 style="color: white;">{{ student.student.name }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="room_name">USN</label>
+                  <h2 style="color: white;">{{ student.usn }}</h2>
+                </div>
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">Contact Information</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="mobileNumberForCalling">Mobile Number (for Calling)</label>
+                  <h2 style="color: white;">{{ spf.mobileNumberForCalling }}</h2>
+              </div>
+              
+              <div class="form__group">
+                  <label for="mobileNumberForWhatsapp">Mobile Number (for WhatsApp)</label>
+                  <h2 style="color: white;">{{ spf.mobileNumberForWhatsapp }}</h2>
+              </div>
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">Degree Information</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="degree">Pursuing Degree</label>
+                  <h2 style="color: white;">{{ spf.degree }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Department</label>
+                  <h2 style="color: white;">{{ spf.student.branch }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Year Of Joining</label>
+                  <h2 style="color: white;">{{ spf.student.batch }}</h2>
+                </div>
+                <div class="form__group">
+                    <label for="typeOfEntry">Type of Entry</label>
+                    <h2 style="color: white;">{{ spf.typeOfEntry }}</h2>
+                </div>              
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">Personal Information</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="degree">Gender</label>
+                  <h2 style="color: white;">{{ spf.gender }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Date Of Birth</label>
+                  <h2 style="color: white;">{{ spf.dateOfBirth }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Personal Email ID</label>
+                  <h2 style="color: white;">{{ spf.personalEmailId }}</h2>
+                </div>
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">Mentor Information</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="degree">Mentor's Name</label>
+                  <h2 style="color: white;">{{ spf.mentorName }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Mentor's Department</label>
+                  <h2 style="color: white;">{{ spf.mentorDept }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Mentor's Mobile Number</label>
+                  <h2 style="color: white;">{{ spf.mentorMobileNumber }}</h2>
+                </div>
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">Personal Information</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="degree">Parent's Mobile Number</label>
+                  <h2 style="color: white;">{{ spf.parentsMobileNumber }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Communication Address</label>
+                  <h2 style="color: white;">{{ spf.communicationAddress }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Permenant Address</label>
+                  <h2 style="color: white;">{{ spf.permanentAddress }}</h2>
+                </div>
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">Grade Information</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="degree">10th Percentage</label>
+                  <h2 style="color: white;">{{ spf.tenthMarks }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Year of Passing 10th</label>
+                  <h2 style="color: white;">{{ spf.tenthYearOfPassing }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">12th Percentage</label>
+                  <h2 style="color: white;">{{ spf.twelfthMarks }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Year of Passing 12th</label>
+                  <h2 style="color: white;">{{ spf.twelfthYearOfPassing }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Diploma Percentage</label>
+                  <h2 style="color: white;">{{ spf.diplomaMarks }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Year of Passing Diploma</label>
+                  <h2 style="color: white;">{{ spf.diplomaYearOfPassing }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">UG/PG</label>
+                  <h2 style="color: white;">{{ spf.ugOrPg }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Degree CGPA</label>
+                  <h2 style="color: white;">{{ spf.degreeCgpa }}</h2>
+                </div>
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">Backlog Information</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="degree">Current Backlogs</label>
+                  <h2 style="color: white;">{{ spf.currentBacklogs }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Backlog History</label>
+                  <h2 style="color: white;">{{ spf.backlogHistory }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Year Back</label>
+                  <h2 style="color: white;">{{ spf.yearBack }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Number of Year Gaps in Academic Career</label>
+                  <h2 style="color: white;">{{ spf.numberOfYearGapsInAcademics }}</h2>
+                </div>
+                <div class="form__group">
+                  <label for="degree">Number of Year Gaps in Current Degree</label>
+                  <h2 style="color: white;">{{ spf.numberofYearGapsInDegree }}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form class="form" method="POST" action="">
+            {% csrf_token %}
+              <div class="form__group">
+                <select name="approval">
+                  {% if spf.validation == 'Pending' %}
+                  <option value="Pending" style="color:yellow;font-weight:bold" selected>Pending</option>
+                  <option value="Approved" style="color:green;font-weight:bold">Approved</option>
+                  <option value="Rejected" style="color:red;font-weight:bold">Rejected</option>
+                  {% elif spf.validation == 'Approved' %}
+                  <option value="Pending" style="color:yellow;font-weight:bold">Pending</option>
+                  <option value="Approved" style="color:green;font-weight:bold" selected>Approved</option>
+                  <option value="Rejected" style="color:red;font-weight:bold">Rejected</option>
+                  {% elif spf.validation == 'Rejected' %}
+                  <option value="Pending" style="color:yellow;font-weight:bold">Pending</option>
+                  <option value="Approved" style="color:green;font-weight:bold">Approved</option>
+                  <option value="Rejected" style="color:red;font-weight:bold" selected>Rejected</option>
+                  {% endif %}
+                </select>
+              </div>
+              <div class="form__group">
+                <label for="comments">Comments:</label>
+                <textarea name="comments" cols="20" rows="10">{{ spf.comments }}</textarea>
+              </div>
+
+            <div class="form__action">
+              <a class="btn btn--dark" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+              <button class="btn btn--main" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+{% else %}
+<main class="create-room layout">
+  <div class="container">
+    <div class="layout__box">
+      <div class="layout__boxHeader">
+        <div class="layout__boxTitle">
+          <a href="{{ request.META.HTTP_REFERER }}">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"> 
+              <title>arrow-left</title>
+              <path
+                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+              </path>
+            </svg>
+          </a>
+          <h3>Know Your Candidate (KYC) : </h3>
+          <p>{{ student.student.name }} ({{ student.usn }})</p>
+        </div>
+      </div>
+      <div class="layout__body">
+        <div class="accordion">
+          <div class="accordion__section">
+            <div class="accordion__header">Resumes</div>
+            <div class="accordion__content">
+              <div class="form__group">
+                {% if kyc.resume %}
+                <a href="{{ kyc.resume.url }}" target="_blank">{{ student.student.name }}'s Resume</a>
+                {% else %}
+                <p>No Resume Uploaded</p>
+                {% endif %}
+              </div>
+              <div class="form__group">
+                {% if kyc.videoResume %}
+                <a href="{{ kyc.videoResume.url }}" target="_blank">{{ student.student.name }}'s Video Resume</a>
+                {% else %}
+                <p>No Video Resume Uploaded</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="accordion__section">
+            <div class="accordion__header">College Identification and Picture</div>
+            <div class="accordion__content">
+              <div class="form__group">
+                {% if kyc.collegeIdCard %}
+                <a href="{{ kyc.collegeIdCard.url }}" target="_blank">{{ student.student.name }}'s College ID Card</a>
+                {% else %}
+                <p>No College ID Card Uploaded</p>
+                {% endif %}
+            </div>
+            <div class="form__group">
+              {% if kyc.passportSizePhoto %}
+              <a href="{{ kyc.passportSizePhoto.url }}" target="_blank">{{ student.student.name }}'s Passport Size Photo</a>
+              {% else %}
+              <p>No Photo Uploaded</p>
+              {% endif %}
+            </div>
+            </div>
+          </div>
+          <div class="accordion__section">
+            <div class="accordion__header">National Identification</div>
+            <div class="accordion__content">
+              <div class="form__group">
+                {% if kyc.panCard %}
+                <a href="{{ kyc.panCard.url }}" target="_blank">{{ student.student.name }}'s PAN Card</a>
+                {% else %}
+                <p>No PAN Card Uploaded</p>
+                {% endif %}
+              </div>
+              <div class="form__group">
+                {% if kyc.aadharCard %}
+                <a href="{{ kyc.aadharCard.url }}" target="_blank">{{ student.student.name }}'s Aadhar Card</a>
+                {% else %}
+                <p>No Aadhar Card Uploaded</p>
+                {% endif %}
+              </div>
+              <div class="form__group">
+                {% if kyc.passport %}
+                <a href="{{ kyc.passport.url }}" target="_blank">{{ student.student.name }}'s Passport</a>
+                {% else %}
+                <p>No Passport Uploaded</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          <div class="accordion__section">
+            <div class="accordion__header">Marks Cards</div>
+            <div class="accordion__content">
+              <div class="form__group">
+                {% if kyc.tenthMarksCard %}
+                <a href="{{ kyc.tenthMarksCard.url }}" target="_blank">{{ student.student.name }}'s 10th Marks Card</a>
+                {% else %}
+                <p>No Tenth Marks Card Uploaded!</p>
+                {% endif %}
+              </div>
+              <div class="form__group">
+                {% if kyc.twelfthMarksCard %}
+                <a href="{{ kyc.twelfthMarksCard.url }}" target="_blank">{{ student.student.name }}'s 12th Marks Card</a>
+                {% else %}
+                <p>No Twelfth Marks Card Uploaded</p>
+                {% endif %}
+              </div>
+              
+              <div class="form__group">
+                {% if kyc.ugMarksSheet %}
+                <a href="{{ kyc.ugMarksSheet.url }}" target="_blank">{{ student.student.name }}'s UG Marks Card</a>
+                {% else %}
+                <p>No UG Marks Card Uploaded</p>
+                {% endif %}
+              </div>
+              
+              <div class="form__group">
+                {% if kyc.pgMarksSheet %}
+                <a href="{{ kyc.pgMarksSheet.url }}" target="_blank">{{ student.student.name }}'s PG Marks Card</a>
+                {% else %}
+                <p>No PG Marks Card Uploaded</p>
+                {% endif %}
+              </div>
+              <div class="form__group">
+                {% if kyc.cgpaCalculator %}
+                <a href="{{ kyc.cgpaCalculator.url }}" target="_blank">{{ student.student.name }}'s CGPA Calculator</a>
+                {% else %}
+                <p>No CGPA Calculator Uploaded</p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <form class="form" method="POST" action="">
+          {% csrf_token %}
+            <div class="form__group">
+              <select name="approval">
+                {% if kyc.validation == 'Pending' %}
+                <option value="Pending" style="color:yellow;font-weight:bold" selected>Pending</option>
+                <option value="Approved" style="color:green;font-weight:bold">Approved</option>
+                <option value="Rejected" style="color:red;font-weight:bold">Rejected</option>
+                {% elif kyc.validation == 'Approved' %}
+                <option value="Pending" style="color:yellow;font-weight:bold">Pending</option>
+                <option value="Approved" style="color:green;font-weight:bold" selected>Approved</option>
+                <option value="Rejected" style="color:red;font-weight:bold">Rejected</option>
+                {% elif kyc.validation == 'Rejected' %}
+                <option value="Pending" style="color:yellow;font-weight:bold">Pending</option>
+                <option value="Approved" style="color:green;font-weight:bold">Approved</option>
+                <option value="Rejected" style="color:red;font-weight:bold" selected>Rejected</option>
+                {% endif %}
+              </select>
+            </div>
+            <div class="form__group">
+              <label for="comments">Comments:</label>
+              <textarea name="comments" cols="20" rows="10">{{ kyc.comments }}</textarea>
+            </div>
+
+          <div class="form__action">
+            <a class="btn btn--dark" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+            <button class="btn btn--main" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,289 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% if 'Trainer' in group %}
+<main class="layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      <div class="topics">
+        <div class="topics__header">
+          <h2>Assignments</h2>
+        </div>
+        <ul class="topics__list">
+          <li>
+            <a href="{% url 'tyl_trainer_test_details' test.id %}?br={{ branchSelected }}&op=consolidated_scores">Consolidated Scores</a>
+          </li>
+        {% if subTests %}
+            {% for subTest in subTests %}
+            <li>
+                <a href="{% url 'tyl_trainer_test_details' subTest.test.id %}?st={{ subTest.id }}&br={{ branchSelected }}">{{ subTest.subTestName }}</a>
+            </li>  
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No assignments yet!</p>
+        {% endif %}
+        <div class="topics__header">
+            <h2>Branches</h2>
+          </div>
+          {% if branches %}
+          {% if consolidated %}
+          <ul class="topics__list">
+              {% for branch in branches %}
+              <li>
+                  <a href="{% url 'tyl_trainer_test_details' test.id %}?br={{ branch }}&op=consolidated_scores">{{ branch }}</a>
+              </li>  
+              {% endfor %}
+          </ul>
+          {% else %}
+          <ul class="topics__list">
+            {% for branch in branches %}
+            <li>
+                <a href="{% url 'tyl_trainer_test_details' test.id %}?st={{ subTestSelected.id }}&br={{ branch }}">{{ branch }}</a>
+            </li>  
+            {% endfor %}
+          </ul>
+          {% endif %}
+          {% else %}
+          <p>No branches to display</p>
+          {% endif %}
+      </div>
+      <!-- Topics End -->
+
+      <!-- Room List Start -->
+      <div class="roomList">        
+        <div class="roomList__header">
+          <div>
+            <h2>{{ test.testName }} ({{ test.batch.batch_year }})</h2>
+            <!-- <p>7,439 Rooms available</p> -->
+          </div>
+          <p>
+          <a class="btn btn--main" href="{% url 'upload_marks' test.id %}?op={{ consolidated }}&st={{ subTestSelected.id }}&br={{ branchSelected }}">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+              <title>add</title>
+              <path
+                d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
+              ></path>
+            </svg>
+            Upload Marks CSV
+          </a>
+          <a class="btn btn--main" href="{% url 'tyl_create_sub_test' test.id %}">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+              <title>add</title>
+              <path
+                d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
+              ></path>
+            </svg>
+            Create Assignment
+          </a>
+          </p>
+        </div> 
+        {% if consolidated %}
+        <div class="roomList__header">
+          <div>
+            <h2>Test: {{ test.testName }} Consolidated Scores</h2>
+            <h2>TYL: {{ test.testType }}</h2>
+          </div>
+          <h2 class="btn btn--main" style="color:black">
+              {{ branchSelected }}
+          </h2>
+        </div>
+        {% if students %}
+        <div>
+          <table>
+            <thead>
+            <tr>
+                <th>USN</th>
+                <th>Student</th>
+                <th>Batch</th>
+                <th>Branch</th>
+                <th>Marks Obtained</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in students %}
+            <form action="{% url 'tyl_trainer_test_details' test.id %}?id={{ student.id }}&br={{ student.branch }}&op=consolidated_scores" method="POST">
+                {% csrf_token %}
+            <tr>
+                <td>{{ student.usn }}</td>
+                <td>{{ student.student.name }}</td>
+                <td>{{ student.batch }}</td>
+                <td>{{ student.branch }}</td>
+                <td>
+                    <div class="form__group">
+                      {% if student.id in marks_dict %}
+                        {% if marks_dict|get_item:student.id == 0 %}
+                        <input type="text" name="marks" placeholder="Enter Marks">
+                        {% else %}
+                        <input type="text" name="marks" value="{{ marks_dict|get_item:student.id }}">
+                        {% endif %}
+                      {% else %}
+                        <input type="text" name="marks" placeholder="Enter Marks">
+                      {% endif %}
+                    </div>
+                </td>
+            </tr>
+            </form>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        {% endif %}
+        {% endif %}
+        {% if subTestSelected %}
+          <div class="roomList__header">
+            <div>
+              <h2>Assignment: {{ subTestSelected.subTestName }}</h2>
+              <h2>Description: {{ subTestSelected.subTestDescription }}</h2>
+              <h2>Deadline: {{ subTestSelected.subTestDeadline }}</h2>
+            </div>
+            <h2 class="btn btn--main" style="color:black">
+                {{ branchSelected }}
+            </h2>
+          </div>
+          {% if students %}
+          <div>
+            <table>
+              <thead>
+              <tr>
+                  <th>USN</th>
+                  <th>Student</th>
+                  <th>Batch</th>
+                  <th>Branch</th>
+                  <th>Marks Obtained</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for student in students %}
+              <form action="{% url 'tyl_trainer_test_details' test.id %}?st={{ subTestSelected.id }}&id={{ student.id }}&br={{ student.branch }}" method="POST">
+                  {% csrf_token %}
+              <tr>
+                  <td>{{ student.usn }}</td>
+                  <td>{{ student.student.name }}</td>
+                  <td>{{ student.batch }}</td>
+                  <td>{{ student.branch }}</td>
+                  <td>
+                      <div class="form__group">
+                        {% if student.id in marks_dict %}
+                          <input type="text" name="marks" value="{{ marks_dict|get_item:student.id }}">
+                        {% else %}
+                          <input type="text" name="marks" placeholder="Enter Marks">
+                        {% endif %}
+                      </div>
+                  </td>
+              </tr>
+              </form>
+              {% endfor %}
+              </tbody>
+          </table>
+          </div>
+          {% else %}
+          <p>No students registered yet!</p>
+          {% endif %}
+        {% endif %}
+      </div>
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+      <div class="topics">
+        <!-- <a class="btn btn--link" href="topics.html">
+          More
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>chevron-down</title>
+            <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+          </svg>
+        </a> -->
+      </div>
+      <!-- Activities End -->
+    </div>
+</main>
+{% elif 'Student' in group %}
+<main class="layout layout--3">
+  <div class="container">
+    <!-- Topics Start -->
+    <div class="topics">
+      <div class="topics__header">
+        <h2>Assignments</h2>
+      </div>
+      {% if subTests %}
+      <ul class="topics__list">
+          {% for subTest in subTests %}
+          <li>
+              <a href="{% url 'tyl_trainer_test_details' subTest.test.id %}?st={{ subTest.id }}">{{ subTest.subTestName }}</a>
+          </li>  
+          {% endfor %}
+      </ul>
+      {% else %}
+      <p>No assignments yet!</p>
+      {% endif %}
+    </div>
+    <!-- Topics End -->
+
+    <!-- Room List Start -->
+    <div class="roomList">        
+      <div class="roomList__header">
+        <div>
+          <h2>{{ test.testName }}</h2>
+        </div>
+      </div> 
+      {% if subTestSelected %}
+        <div class="roomList__header">
+          <div>
+            <h2>Assignment: {{ subTestSelected.subTestName }}</h2>
+            <h2>Description: {{ subTestSelected.subTestDescription }}</h2>
+            <h2>Deadline: {{ subTestSelected.subTestDeadline }}</h2>
+          </div>
+        </div>
+        {% endif %}
+      {% if subTestSelected %}
+        <div class="form__group">
+          <label for="room_name">Maximum Marks</label>
+          <h2 style="color: white;">{{ subTestSelected.maxMarks }}</h2>
+        </div>
+        <div class="form__group">
+          <label for="room_name">Passing Marks</label>
+          <h2 style="color: white;">{{ subTestSelected.passingMarks }}</h2>
+        </div>
+        <div class="form__group">
+          <label for="room_name">Marks Obtained</label>
+          {% if submitted %}
+            <h2 style="color: white;">{{ test_details.marksObtained }}</h2>
+            {% if passed %}
+              <h2 style="color: greenyellow">Passed!</h2>
+            {% else %}
+              <h2 style="color: red">Failed!</h2>
+            {% endif %}
+          {% else %}
+            <h2 style="color: white;">Assignment not submitted yet!</h2>
+          {% endif %}
+        </div>
+      {% else %}
+        <p>Select an Assignment!</p>
+      {% endif %}
+    </div>
+    <!-- Room List End -->
+
+    <!-- Activities Start -->
+    <div class="topics">
+      <div class="topics">
+        <div class="topics__header">
+          <h2>Assignments Pending</h2>
+        </div>
+        {% if pendingSubtests %}
+        <ul class="topics__list">
+          {% for subTest in pendingSubtests %}
+          <li>
+            <a href="{% url 'tyl_trainer_test_details' subTest.test.id %}?st={{ subTest.id }}">{{ subTest.subTestName }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No assignments pending!</p>
+        {% endif %}
+      </div>
+    </div>
+    <!-- Activities End -->
+  </div>
+</main>
+{% endif %}
+{% endblock %}

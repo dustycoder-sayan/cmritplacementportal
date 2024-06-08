@@ -1,0 +1,169 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% if page == 'spf' %}
+<main class="layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      <div class="topics">
+        <div class="topics__header">
+          <h2>Branches</h2>
+        </div>
+        <ul class="topics__list">
+          {% for branch in branches %}
+          <li>
+            <a href="{% url 'spf_home_page' %}?br={{branch}}&ba={{year}}">{{ branch }} '{{ year }}</a>
+          </li>
+          <li>
+            <a href="{% url 'spf_home_page' %}?br={{branch}}&ba={{year|add:'1'}}">{{ branch }} '{{ year|add:"1" }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        <!-- <a class="btn btn--link" href="topics.html">
+          More
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>chevron-down</title>
+            <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+          </svg>
+        </a> -->
+      </div>
+      <!-- Topics End -->
+
+      <!-- Room List Start -->
+      <div class="roomList">
+        <div class="roomList__header">
+          <div>
+            <h2>Validate Student Placement Form (SPF)</h2>
+            <!-- <p>7,439 Rooms available</p> -->
+          </div>
+          <!-- <a class="btn btn--main" href="create-room.html">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+              <title>add</title>
+              <path
+                d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
+              ></path>
+            </svg>
+            Create Drive
+          </a> -->
+        </div> 
+        {% if students %}
+        {% for student in students %}
+        <div class="roomListRoom">
+          <div class="roomListRoom__content">
+            <a href="{% url 'spf_details' student.id %}">{{ student.student.name }}</a>
+          </div>
+          <div class="roomListRoom__meta">
+            <a href="room.html" class="roomListRoom__joined">
+              {{ student.usn }}
+            </a>
+          </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No students to show</p>
+        {% endif %}
+      </div>
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+      <div class="topics">
+        <!-- <a class="btn btn--link" href="topics.html">
+          More
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>chevron-down</title>
+            <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+          </svg>
+        </a> -->
+      </div>
+      <!-- Activities End -->
+    </div>
+</main>
+{% else %}
+<main class="layout layout--3">
+  <div class="container">
+    <!-- Topics Start -->
+    <div class="topics">
+      <div class="topics__header">
+        <h2>Branches</h2>
+      </div>
+      {% if 'FPC' in group %}
+      <ul class="topics__list">
+        {% for branch in branches %}
+        <li>
+          <a href="{% url 'kyc_home_page' %}?br={{branch}}&ba={{year}}">{{ branch }} '{{ year }}</a>
+        </li>
+        <li>
+          <a href="{% url 'kyc_home_page' %}?br={{branch}}&ba={{year|add:'1'}}">{{ branch }} '{{ year|add:"1" }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% elif 'Student' in group %}
+      <ul class="topics__list">
+        {% for branch in branches %}
+        <li>
+          <a href="{% url 'kyc_home_page' %}?br={{branch}}&ba={{year}}">{{ branch }} '{{ year }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <!-- <a class="btn btn--link" href="topics.html">
+        More
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+          <title>chevron-down</title>
+          <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+        </svg>
+      </a> -->
+    </div>
+    <!-- Topics End -->
+
+    <!-- Room List Start -->
+    <div class="roomList">
+      <div class="roomList__header">
+        <div>
+          <h2>Validate Know Your Candidate (KYC)</h2>
+          <!-- <p>7,439 Rooms available</p> -->
+        </div>
+        <!-- <a class="btn btn--main" href="create-room.html">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>add</title>
+            <path
+              d="M16.943 0.943h-1.885v14.115h-14.115v1.885h14.115v14.115h1.885v-14.115h14.115v-1.885h-14.115v-14.115z"
+            ></path>
+          </svg>
+          Create Drive
+        </a> -->
+      </div> 
+      {% if students %}
+      {% for student in students %}
+      <div class="roomListRoom">
+        <div class="roomListRoom__content">
+          <a href="{% url 'kyc_details' student.id %}">{{ student.student.name }}</a>
+        </div>
+        <div class="roomListRoom__meta">
+          <a href="" class="roomListRoom__joined">
+            {{ student.usn }}
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p>No students to show</p>
+      {% endif %}
+    </div>
+    <!-- Room List End -->
+
+    <!-- Activities Start -->
+    <div class="topics">
+      <!-- <a class="btn btn--link" href="topics.html">
+        More
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+          <title>chevron-down</title>
+          <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+        </svg>
+      </a> -->
+    </div>
+    <!-- Activities End -->
+  </div>
+</main>
+{% endif %}
+{% endblock content %}

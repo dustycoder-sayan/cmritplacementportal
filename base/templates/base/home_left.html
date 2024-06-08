@@ -1,0 +1,147 @@
+<div class="topics">
+    {% if 'Student' in groups %}
+    <div class="topics__header">
+      <h2>Browse TYL</h2>
+    </div>
+    <ul class="topics__list">
+      <li>
+        <a href="{% url 'tyl_home_page' 'language' %}">Language</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'aptitude' %}">Aptitude</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'core' %}">Core</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'programming' %}">Programming</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'soft skills' %}">Soft Skills</a>
+      </li>
+    </ul>
+    <div class="topics__header">
+      <h2>Fill Placement Data</h2>
+    </div>
+    <ul class="topics__list">
+      <li>
+        <a href="{% url 'kyc_form' %}">Know Your Candidate (KYC)</a>
+      </li>
+      <li>
+        <a href="{% url 'spf_form' %}">Student Placement Form (SPF)</a>
+      </li>
+    </ul>
+    {% endif %}
+    {% if 'Officer' in groups %}
+    <div class="topics">
+      <div class="topics__header">
+        <h2>Browse SPAD</h2>
+      </div>
+      <ul class="topics__list">
+        <li>
+          {% for batch in batches %}
+          <a href="{% url 'spad_details' batch %}">{{ batch }}</a>
+          {% endfor %}
+        </li>
+      </ul>
+    </div>
+    {% endif %}
+    {% if 'FPC' in groups %}
+    <div class="topics">
+      <div class="topics__header">
+        <h2>Validate Placement Data</h2>
+      </div>
+      <ul class="topics__list">
+        <li>
+          <a href="{% url 'kyc_home_page' %}">Know Your Candidate (KYC)</a>
+        </li>
+        <li>
+          <a href="{% url 'spf_home_page' %}">Student Placement Form (SPF)</a>
+        </li>
+      </ul>
+      <!-- <div class="topics__header">
+        <h2>Offer Letters</h2>
+      </div>
+      <ul class="topics__list">
+        {% for batch in batches %}
+        <li>
+          <a href="">{{ batch.batch_year }}</a>
+        </li>
+        {% endfor %}
+      </ul> -->
+    </div>
+    {% endif %}
+    {% if 'Trainer' in groups %}
+    <div class="topics__header">
+      <h2>Browse LACES</h2>
+    </div>
+    <ul class="topics__list">
+      <li>
+        <a href="{% url 'tyl_home_page' 'language' %}">Language</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'aptitude' %}">Aptitude</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'core' %}">Core</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'programming' %}">Programming</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'soft skills' %}">Soft Skills</a>
+      </li>
+    </ul>
+    {% endif %}
+    {% if 'SPC' in groups %}
+    <div class="topics__header">
+      <h2>Validate KYC Data</h2>
+    </div>
+    <ul class="topics__list">
+      <li>
+        <a href="{% url 'kyc_home_page' %}">Know Your Candidate (KYC)</a>
+      </li>
+    </ul>
+    {% endif %}
+    {% if 'Director' in groups %}
+    <div class="topics__header">
+      <h2>Browse Placement Data - Statistics</h2>
+    </div>
+    <ul class="topics__list">
+      <li>
+        <a href="#">SPAD</a>
+      </li>
+    </ul>
+    <div class="topics__header">
+      <h2>Browse TYL Data</h2>
+    </div>
+    <ul class="topics__list">
+      <li>
+        <a href="{% url 'tyl_home_page' 'language' %}">Statistics</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'language' %}">Language</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'aptitude' %}">Aptitude</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'core' %}">Core</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'programming' %}">Programming</a>
+      </li>
+      <li>
+        <a href="{% url 'tyl_home_page' 'soft skills' %}">Soft Skills</a>
+      </li>
+    </ul>
+    <div class="topics__header">
+      <h2>Browse Drives</h2>
+    </div>
+    <ul class="topics__list">
+      <li>
+        <a href="#">All Drives</a>
+      </li>
+    </ul>
+    {% endif %}
+</div>  

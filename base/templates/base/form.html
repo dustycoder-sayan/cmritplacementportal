@@ -1,0 +1,457 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% if page == 'SPF' %}
+<main class="create-room layout">
+    <div class="container">
+      <div class="layout__box">
+        <div class="layout__boxHeader">
+          <div class="layout__boxTitle">
+            <a href="{{ request.META.HTTP_REFERER }}">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                <title>arrow-left</title>
+                <path
+                  d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+                </path>
+              </svg>
+            </a>
+            <h3>Student Placement Form (SPF) Form</h3>
+          </div>
+        </div>
+        <div class="layout__body">
+          {% if spf %}
+          <div class="form__group">
+            <label for="room_name">Approval Status</label>
+            <h2 style="color: white; font-size: larger;">{{ spf.validation }}</h2>
+          </div>
+          <div class="form__group">
+            <label for="room_name">Comments</label>
+            <h2 style="color: white; font-size: larger;">{{ spf.comments }}</h2>
+          </div>
+          {% endif %}
+          <form method="POST" action="" class="form">
+            {% csrf_token %}
+            <div class="accordion">
+              <div class="accordion__section">
+                <div class="accordion__header">Contact Information</div>
+                <div class="accordion__content">
+                  <div class="form__group">
+                    <label for="{{ field.label }}">Mobile Number (Calling)</label>
+                    {{ form.mobileNumberForCalling }}
+                  </div>
+                  <div class="form__group">
+                    <label for="mobileNumberWhatsApp">Mobile Number (WhatsApp)</label>
+                    {{ form.mobileNumberForWhatsapp }}
+                  </div>
+                </div>
+              </div>
+              <div class="accordion__section">
+                <div class="accordion__header">General Information</div>
+                <div class="accordion__content">
+                  <div class="form__group">
+                    <label for="degree">Degree</label>
+                    {{ form.degree }}
+                  </div>
+                  <div class="form__group">
+                    <label for="typeOfEntry">Type Of Entry</label>
+                    {{ form.typeOfEntry }}
+                  </div>
+                  <div class="form__group">
+                    <label for="gender">Gender</label>
+                    {{ form.gender }}
+                  </div>
+                  <div class="form__group">
+                    <label for="dob">Date Of Birth (DD/MM/YYYY)</label>
+                    {{ form.dateOfBirth }}
+                  </div>
+                  <div class="form__group">
+                    <label for="">Personal Email ID</label>
+                    {{ form.personalEmailId }}
+                  </div>
+                </div>
+              </div>
+              <div class="accordion__section">
+                <div class="accordion__header">Mentor Information</div>
+                <div class="accordion__content">
+                  <div class="form__group">
+                    <label for="mentorName">Mentor Name</label>
+                    {{ form.mentorName }}
+                </div>
+                
+                <div class="form__group">
+                    <label for="mentorDept">Mentor Department</label>
+                    {{ form.mentorDept }}
+                </div>
+                
+                <div class="form__group">
+                    <label for="mentorMobileNumber">Mentor Mobile Number</label>
+                    {{ form.mentorMobileNumber }}
+                </div>
+                </div>
+              </div>
+              <div class="accordion__section">
+                <div class="accordion__header">Personal Information</div>
+                <div class="accordion__content">
+                  <div class="form__group">
+                    <label for="parentsMobileNumber">Parents Mobile Number</label>
+                    {{ form.parentsMobileNumber }}
+                </div>
+                
+                <div class="form__group">
+                    <label for="communicationAddress">Communication Address</label>
+                    {{ form.communicationAddress }}
+                </div>
+                
+                <div class="form__group">
+                    <label for="permanentAddress">Permanent Address</label>
+                    {{ form.permanentAddress }}
+                </div>            
+                </div>
+              </div>
+              <div class="accordion__section">
+                <div class="accordion__header">Academic Information: Pre-Degree</div>
+                <div class="accordion__content">
+                  <div class="form__group">
+                    <label for="tenthMarks">Tenth Marks</label>
+                    {{ form.tenthMarks }}
+                </div>
+                
+                <div class="form__group">
+                    <label for="tenthYearOfPassing">Tenth Year of Passing (YYYY)</label>
+                    {{ form.tenthYearOfPassing }}
+                </div>
+                
+                <div class="form__group">
+                    <label for="twelfthMarks">Twelfth Marks</label>
+                    {{ form.twelfthMarks }}
+                </div>
+                
+                <div class="form__group">
+                    <label for="twelfthYearOfPassing">Twelfth Year of Passing (YYYY)</label>
+                    {{ form.twelfthYearOfPassing }}
+                </div>
+                
+                <div class="form__group">
+                    <label for="diplomaMarks">Diploma Marks</label>
+                    {{ form.diplomaMarks }}
+                </div>
+                
+                <div class="form__group">
+                    <label for="diplomaYearOfPassing">Diploma Year of Passing (YYYY)</label>
+                    {{ form.diplomaYearOfPassing }}
+                </div>
+                
+                </div>
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">Academic Information: Degree</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="ugOrPg">UG or PG</label>
+                  {{ form.ugOrPg }}
+              </div>
+              
+              <div class="form__group">
+                  <label for="degreeCgpa">Degree CGPA</label>
+                  {{ form.degreeCgpa }}
+              </div>
+              
+              <div class="form__group">
+                  <label for="currentBacklogs">Current Backlogs</label>
+                  {{ form.currentBacklogs }}
+              </div>
+              
+              <div class="form__group">
+                  <label for="backlogHistory">Backlog History</label>
+                  {{ form.backlogHistory }}
+              </div>
+              
+              <div class="form__group">
+                  <label for="yearBack">Year Back</label>
+                  {{ form.yearBack }}
+              </div>
+              
+              <div class="form__group">
+                  <label for="numberOfYearGapsInAcademics">Number of Year Gaps in Academics</label>
+                  {{ form.numberOfYearGapsInAcademics }}
+              </div>
+              
+              <div class="form__group">
+                  <label for="numberofYearGapsInDegree">Number of Year Gaps in Degree</label>
+                  {{ form.numberofYearGapsInDegree }}
+              </div>
+              </div>
+            </div>
+            <div class="form__action">
+              <a class="btn btn--dark" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+              <button class="btn btn--main" type="submit">Submit</button>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+{% elif page == 'KYC' %}
+<main class="create-room layout">
+  <div class="container">
+    <div class="layout__box">
+      <div class="layout__boxHeader">
+        <div class="layout__boxTitle">
+          <a href="{{ request.META.HTTP_REFERER }}">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+              <title>arrow-left</title>
+              <path
+                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+              </path>
+            </svg>
+          </a>
+          <h3>Know Your Candidate (KYC) Form</h3>
+        </div>
+      </div>
+      <div class="layout__body">
+        {% if kyc %}
+        <div class="form__group">
+          <label for="room_name">Approval Status</label>
+          <h2 style="color: white; font-size: larger;">{{ kyc.validation }}</h2>
+        </div>
+        <div class="form__group">
+          <label for="room_name">Comments</label>
+          <h2 style="color: white; font-size: larger;">{{ kyc.comments }}</h2>
+        </div>
+        {% endif %}
+        <form method="POST" action="" class="form" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="accordion">
+            <div class="accordion__section">
+              <div class="accordion__header">Resumes</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="{{ field.label }}">Resume Link</label>
+                  {{ form.resume }}
+                </div>
+                <div class="form__group">
+                  <label for="mobileNumberWhatsApp">Video Resume</label>
+                  {{ form.videoResume }}
+                </div>
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">College Identification Card and Picture</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="degree">College ID Card</label>
+                  {{ form.collegeIdCard }}
+                </div>
+                <div class="form__group">
+                  <label for="typeOfEntry">Passport Size Photo</label>
+                  {{ form.passportSizePhoto }}
+                </div>
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">National Identification Cards</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="mentorName">PAN Card</label>
+                  {{ form.panCard }}
+                </div>
+                <div class="form__group">
+                  <label for="mentorName">Aadhar Card</label>
+                  {{ form.aadharCard }}
+                </div>
+                <div class="form__group">
+                    <label for="mentorDept">Passport</label>
+                    {{ form.passport }}
+                </div>
+              </div>
+            </div>
+            <div class="accordion__section">
+              <div class="accordion__header">Marks Card</div>
+              <div class="accordion__content">
+                <div class="form__group">
+                  <label for="parentsMobileNumber">Tenth Marks Card</label>
+                  {{ form.tenthMarksCard }}
+              </div>
+              
+              <div class="form__group">
+                  <label for="communicationAddress">Twelfth or Diploma Marks Card</label>
+                  {{ form.twelfthMarksCard }}
+              </div>
+              
+              <div class="form__group">
+                  <label for="permanentAddress">UG Marks Sheet</label>
+                  {{ form.ugMarksSheet }}
+              </div>
+              
+              <div class="form__group">
+                <label for="permanentAddress">PG Marks Sheet</label>
+                {{ form.pgMarksSheet }}
+              </div>
+
+              <div class="form__group">
+                <label for="permanentAddress">CGPA Calculator</label>
+                {{ form.cgpaCalculator }}
+              </div>
+              </div>
+            </div>
+          <div class="form__action">
+            <a class="btn btn--dark" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+            <button class="btn btn--main" type="submit">Submit</button>
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% elif page == 'test' %}
+<main class="create-room layout">
+  <div class="container">
+    <div class="layout__box">
+      <div class="layout__boxHeader">
+        <div class="layout__boxTitle">
+          <a href="{{ request.META.HTTP_REFERER }}">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+              <title>arrow-left</title>
+              <path
+                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+              </path>
+            </svg>
+          </a>
+          <h3>Create Test - {{ name }}</h3>
+        </div>
+      </div>
+      <div class="layout__body">
+        <form class="form" action="" method="POST">
+          {% csrf_token %}
+          <div class="form__group">
+            <label for="batch">Batch</label>
+            <select name="batch">
+              {% for batch in batches %}
+              <option value="{{ batch.batch_year }}">{{ batch.batch_year }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="form__group">
+            <label for="testName">Test Name (eg: P3 - Java)</label>
+            {{ form.testName }}
+          </div>
+          <div class="form__action">
+              <a class="btn btn--dark" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+              <button class="btn btn--main" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% elif page == 'sub_test' %}
+<main class="create-room layout">
+  <div class="container">
+    <div class="layout__box">
+      <div class="layout__boxHeader">
+        <div class="layout__boxTitle">
+          <a href="{{ request.META.HTTP_REFERER }}">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+              <title>arrow-left</title>
+              <path
+                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+              </path>
+            </svg>
+          </a>
+          <h3>Create Assignment : {{ test.testName }}</h3>
+        </div>
+      </div>
+      <div class="layout__body">
+        <form class="form" action="" method="POST">
+          {% csrf_token %}
+          <div class="form__group">
+            <label for="subTestName">Assignment Name (eg: IAT 1, Assignment 1)</label>
+            {{ form.subTestName }}
+          </div>
+          <div class="form__group">
+            <label for="subTestName">Assignment Description</label>
+            <input type="text" name="subTestDescription" id="">
+          </div>
+          <div class="form__group">
+            <label for="subTestDeadline">Assignment Deadline (DD/MM/YYYY)</label>
+            {{ form.subTestDeadline }}
+          </div>
+          <div class="form__group">
+            <label for="maxMarks">Maximum Marks</label>
+            {{ form.maxMarks }}
+          </div>
+          <div class="form__group">
+            <label for="subTestDeadline">Passing Marks</label>
+            {{ form.passingMarks }}
+          </div>
+          <div class="form__action">
+              <a class="btn btn--dark" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+              <button class="btn btn--main" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% elif page == 'upload_marks' %}
+<main class="create-room layout">
+  <div class="container">
+    <div class="layout__box">
+      <div class="layout__boxHeader">
+        <div class="layout__boxTitle">
+          <a href="{{ request.META.HTTP_REFERER }}">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+              <title>arrow-left</title>
+              <path
+                d="M13.723 2.286l-13.723 13.714 13.719 13.714 1.616-1.611-10.96-10.96h27.625v-2.286h-27.625l10.965-10.965-1.616-1.607z">
+              </path>
+            </svg>
+          </a>
+          <h3>Upload Marks : {{ test.testName }} ({{ test.batch }})</h3>
+        </div>
+      </div>
+      <div class="layout__body">
+        <form class="form" action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form__group">
+            <label for="room_name">Test Type</label>
+            <h2 style="color: white;">{{ test.testType }}</h2>
+          </div>
+          <div class="form__group">
+            <label for="room_name">Course</label>
+            <h2 style="color: white;">{{ test.testName }}</h2>
+          </div>
+          <div class="form__group">
+            <label for="room_name">Batch</label>
+            <h2 style="color: white;">{{ test.batch }}</h2>
+          </div>
+          {% if consolidated %}
+          <div class="form__group">
+            <label for="room_name">Assignment Type</label>
+            <h2 style="color: white;">Consolidated Scores</h2>
+          </div>
+          {% else %}
+          <div class="form__group">
+            <label for="room_name">Assignment Type</label>
+            <h2 style="color: white;">{{ subTest.subTestName }}</h2>
+          </div>
+          {% endif %}
+          <div class="form__group">
+            <label for="subTestDeadline">Upload Marks CSV file</label>
+            <h3>Mandatory Columns : USN, Marks (Follow naming convention)</h3>
+            {{ form.csv_file }}
+          </div>
+          <div class="form__action">
+              <a class="btn btn--dark" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+              <button class="btn btn--main" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endif %}
+{% endblock %}

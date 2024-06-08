@@ -1,0 +1,161 @@
+{% extends 'main.html' %}
+
+{% block content %}
+{% if page == 'spf_kyc' %}
+<main class="layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      <div class="topics">
+        <div class="topics__header">
+          <h2>Batches</h2>
+        </div>
+        <ul class="topics__list">
+          {% for batch in batches %}
+          <li>
+            <a href="{% url 'spf_kyc_dashboard' batch.id %}">{{ batch.batch_year }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        <!-- <a class="btn btn--link" href="topics.html">
+          More
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>chevron-down</title>
+            <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+          </svg>
+        </a> -->
+      </div>
+      <!-- Topics End -->
+
+      <!-- Room List Start -->
+      <div class="roomList">        
+        <div class="roomList__header">
+          <div>
+            <h2>SPF KYC Statistics</h2>
+            <!-- <p>7,439 Rooms available</p> -->
+          </div>
+        </div> 
+          <div class="roomList__header">
+            <div>
+              <h2>Batch: {{ batchSelected.batch_year }}</h2>
+            </div>
+          </div>
+          <div>
+            <table>
+              <thead>
+              <tr>
+                  <th>Branch</th>
+                  <th>Total Students</th>
+                  <th>Students filled SPF</th>
+                  <th>Students filled KYC</th>
+              </tr>
+              </thead>
+              <tbody>
+                {% for branch in branches %}
+                <tr>
+                    <td>{{ branch.branch }}</td>
+                    <td>{{ branch.total_students }}</td>
+                    <td>{{ branch.students_with_spf }}</td>
+                    <td>{{ branch.students_with_kyc }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+          </div>
+        </div>
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+      <div class="topics">
+        <!-- <a class="btn btn--link" href="topics.html">
+          More
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>chevron-down</title>
+            <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+          </svg>
+        </a> -->
+      </div>
+      <!-- Activities End -->
+    </div>
+</main>
+{% elif page == 'subtests' %}
+<main class="layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      <div class="topics">
+        <div class="topics__header">
+          <h2>Batches</h2>
+        </div>
+        <ul class="topics__list">
+          {% for batch in batches %}
+          <li>
+            <a href="{% url 'spf_kyc_dashboard' batch.id %}">{{ batch.batch_year }}</a>
+          </li>
+          {% endfor %}
+        </ul>
+        <!-- <a class="btn btn--link" href="topics.html">
+          More
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>chevron-down</title>
+            <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+          </svg>
+        </a> -->
+      </div>
+      <!-- Topics End -->
+
+      <!-- Room List Start -->
+      <div class="roomList">        
+        <div class="roomList__header">
+          <div>
+            <h2>Assignment Statistics - {{ test }}</h2>
+            <!-- <p>7,439 Rooms available</p> -->
+          </div>
+        </div> 
+          <div class="roomList__header">
+            <div>
+              <h2>Batch: {{ batch }}</h2>
+            </div>
+          </div>
+          {% for subtest, stats in subtest_stats.items %}
+            <h2>{{ subtest.subTestName }}</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Branch</th>
+                        <th>Total Students</th>
+                        <th>Students with Test</th>
+                        <th>Students Passed</th>
+                        <th>Students Failed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for branch_stats in stats %}
+                        <tr>
+                            <td>{{ branch_stats.branch }}</td>
+                            <td>{{ branch_stats.total_students }}</td>
+                            <td>{{ branch_stats.students_with_test }}</td>
+                            <td>{{ branch_stats.students_passed }}</td>
+                            <td>{{ branch_stats.students_failed }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+          </div>
+        </div>
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+      <div class="topics">
+        <!-- <a class="btn btn--link" href="topics.html">
+          More
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+            <title>chevron-down</title>
+            <path d="M16 21l-13-13h-3l16 16 16-16h-3l-13 13z"></path>
+          </svg>
+        </a> -->
+      </div>
+      <!-- Activities End -->
+    </div>
+</main>
+{% endif %}
+{% endblock content %}

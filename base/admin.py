@@ -1,0 +1,20 @@
+from django.contrib import admin
+from .models import *
+
+admin.site.register(User)
+admin.site.register(Students)
+admin.site.register(Drives)
+admin.site.register(ChatRoom)
+admin.site.register(Topic)   
+admin.site.register(KYC)
+admin.site.register(SPF)      
+admin.site.register(Message)
+admin.site.register(Batch)
+admin.site.register(Tests)
+admin.site.register(SubTests)
+admin.site.register(StudentTest)
+admin.site.register(StudentAptitudeTestScores)
+admin.site.register(StudentCoreTestScores)
+admin.site.register(StudentLanguageTestScores)
+admin.site.register(StudentProgrammingTestScores)
+admin.site.register(StudentSoftSkillsTestScores)

@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+
+{% block content %}
+ 
+ <main class="profile-page layout layout--3">
+    <div class="container">
+      <!-- Topics Start -->
+      <div>
+      </div>
+      <!-- Topics End -->
+
+      <!-- Room List Start -->
+      <div class="roomList">
+        <div class="profile">
+          <div class="profile__avatar">
+            <div class="avatar avatar--large active">
+              <img src="{{ user.avatar.url }}" />
+            </div>
+          </div>
+          <div class="profile__info">
+            <h3>{{ user.name }}</h3>
+            <p>@{{ user.username }}</p>
+            {% if request.user == user %}
+            <a href="{% url 'user_update' %}" class="btn btn--main btn--pill">Edit Profile</a>
+            {% endif %}
+          </div>
+          <div class="profile__about">
+            <h3>About</h3>
+            <p>
+                <p>
+                Role(s): 
+                {% for group in groups %}
+                    {{ group }}
+                {% endfor %}
+                </p>
+            </p>
+            <p>Email ID: {{ user.email }}</p>
+            {% if student %}
+            <p>Batch: {{ student.batch }}</p>
+            <p>Branch: {{ student.branch }}</p>
+            <p>USN: {{ student.usn }}</p>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="roomList__header">
+          <div>
+            <h2>Groups Created by {{ user.name }}</h2>
+          </div>
+        </div>
+        {% include 'base/home_center.html' %}
+        
+      </div>
+      <!-- Room List End -->
+
+      <!-- Activities Start -->
+      {% include 'base/home_right.html' %}
+      <!-- Activities End -->
+    </div>
+  </main>
+
+{% endblock content %}
